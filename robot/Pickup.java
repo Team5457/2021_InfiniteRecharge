@@ -1,8 +1,8 @@
-package frc.robot;
+/*package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWMTalonSRX;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
+import edu.wpi.first.wpilibj.motorcontrol.PWMTalonSRX;
+import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -58,3 +58,4 @@ public class Pickup extends Subsystem {
         pickup.stopMotor();
     }
 }
+*/

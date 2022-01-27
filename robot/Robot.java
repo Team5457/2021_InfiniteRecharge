@@ -4,35 +4,36 @@
 
 package frc.robot;
 
-import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RobotDrive;
+//import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.controller.PIDController;
+//import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import frc.robot.nexuscommand.*;
 import edu.wpi.first.wpilibj.Timer;
-import com.ctre.phoenix.sensors.PigeonIMU;
+/*import com.ctre.phoenix.sensors.PigeonIMU;
 import com.ctre.phoenix.sensors.PigeonImuJNI;
 import com.ctre.phoenix.sensors.PigeonIMU.FusionStatus;
 import com.ctre.phoenix.sensors.PigeonIMU.GeneralStatus;
-import com.ctre.phoenix.sensors.PigeonIMU.PigeonState;
+//import com.ctre.phoenix.sensors.PigeonIMU.PigeonState;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Controller;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value.*;
 import edu.wpi.first.wpilibj.SolenoidBase.*;
+*/
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 
 
 
@@ -45,12 +46,12 @@ public class Robot extends TimedRobot {
   public final Driver driveSystem = new Driver();
   //private final CameraManager cameraSystem = new CameraManager();
 
-  private Shoot shootSystem = new Shoot();
+  //private Shoot shootSystem = new Shoot();
 
 
   private final Joystick sJoy = new Joystick(0);
   private final Joystick xCon = new Joystick(1);
-  public static AutoManager auto = new AutoManager();
+  //public static AutoManager auto = new AutoManager();
   private UsbCamera camera;
   public final static AnalogInput ultrasonic = new AnalogInput(0);
   public static double rawValue;
@@ -59,8 +60,8 @@ public class Robot extends TimedRobot {
   private final Timer timer = new Timer();
   private VictorSP colorwheel = new VictorSP(3);
   //pneumatics
-  Compressor compressor = new Compressor(0);
-  static DoubleSolenoid snoid = new DoubleSolenoid(0,1);
+  //Compressor compressor = new Compressor(0);
+  //static DoubleSolenoid snoid = new DoubleSolenoid(0,1);
   
   
 
@@ -74,20 +75,20 @@ public class Robot extends TimedRobot {
 
 
 
-  public static PigeonIMU pidgey = new PigeonIMU(0);
+  //public static PigeonIMU pidgey = new PigeonIMU(0);
   public static double currentAngle;
   public static Boolean angleIsGood;
   public static final int kTimeoutMs = 30;
 
-  public static GeneralStatus stat2= new GeneralStatus();
+  //public static GeneralStatus stat2= new GeneralStatus();
  
-  public static FusionStatus stat = new FusionStatus();
+  //public static FusionStatus stat = new FusionStatus();
  
 
-  public static AHRS ahrs = new AHRS(SPI.Port.kMXP);
+  //public static AHRS ahrs = new AHRS(SPI.Port.kMXP);
   PIDController turnController;
 
-  private double isplacementz = (double)ahrs.getDisplacementZ();
+  //private double isplacementz = (double)ahrs.getDisplacementZ();
  
 
 
@@ -110,7 +111,7 @@ public class Robot extends TimedRobot {
     turnController = new PIDController(kP, kI, kD);
     turnController.enableContinuousInput(-180.0f, 180.0f);
     controller = new Joystick(0);
-    
+    /*
     ahrs.zeroYaw();
     ahrs.zeroYaw();
 
@@ -119,7 +120,7 @@ public class Robot extends TimedRobot {
 
     // Displays things on Shuffleboard
     Shuffleboard.getTab("Navx Compass").add((Sendable) ahrs);
-
+    */
 
   
 
@@ -141,7 +142,7 @@ public class Robot extends TimedRobot {
 
     
     //pidgey.setFusedHeading(0.0, kTimeoutMs);
-    
+    /*
     auto.clearCommands();
 
     //motors are backwards - left is right!!!
@@ -150,7 +151,7 @@ public class Robot extends TimedRobot {
     auto.addCommand(new autoShoot(.7, shootSystem));
     auto.addCommand(new Wait(2, driveSystem));
     auto.addCommand(new drive(0.5,0.5,.5,driveSystem));
-    
+    */
    
     //auto.addCommand(new Search(driveSystem, pickupSystem));
     
@@ -184,9 +185,11 @@ public class Robot extends TimedRobot {
 
     
       //runs the array
+      /*
       if (!auto.driveExecuting)
         driveSystem.stopRobot();
       auto.execute();
+      */
 
       
 
@@ -200,19 +203,19 @@ public class Robot extends TimedRobot {
   
   @Override
   public void teleopInit() {
-    compressor.setClosedLoopControl(true);
-    snoid.set(Value.kReverse);
+    //compressor.setClosedLoopControl(true);
+    //snoid.set(Value.kReverse);
   }
 
   @Override
  
   public void teleopPeriodic() {
-    PigeonIMU.FusionStatus stat = new PigeonIMU.FusionStatus();
+    //PigeonIMU.FusionStatus stat = new PigeonIMU.FusionStatus();
     //reads the controller input
     driveSystem.driveRobot(xCon);
     
     //pickupSystem.spinMotor(xCon);
-    shootSystem.shoot(xCon);
+    //shootSystem.shoot(xCon);
     //System.out.println(psi);
     //pneumaticSystem.pneumatic(xCon);
 
@@ -244,7 +247,7 @@ public class Robot extends TimedRobot {
     }
     else if(sJoy.getRawAxis(3) == 0){
       compressor.setClosedLoopControl(true);
-    }*/
+    }
 
 
     
@@ -257,7 +260,7 @@ public class Robot extends TimedRobot {
 
       snoid.set(Value.kReverse);
     }
-    
+    */
     //colorwheel scavenged from the old picker
     if(sJoy.getRawButton(1)){
       colorwheel.set(1);
@@ -270,12 +273,12 @@ public class Robot extends TimedRobot {
   
   
 
-    
+    /*
    SmartDashboard.putNumber("Angle", ahrs.getAngle());
    SmartDashboard.putNumber("Displacement X", ahrs.getDisplacementX());
    SmartDashboard.putNumber("Displacement Z", ahrs.getDisplacementZ());
    SmartDashboard.putNumber("Displacement Y", ahrs.getDisplacementY());
-    
+    */
 
   }
 
@@ -299,12 +302,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void testPeriodic() {
-
+/*
 
     if (!auto.driveExecuting)
     driveSystem.stopRobot();
   auto.execute();
-
+*/
 
 
 
